@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Fake News Baby</string>
+    <string name="email_header">Your Email Address (optionnal)</string>
+    <string name="key_header">Guardian Key</string>
+    <string name="checkbox_header">Use Default</string>
+    <string name="checkbox_text">Use the default Guardian application Key</string>
+    <string name="default_key">0528910f-90e1-4678-b91d-dd32d6f56805</string>
+    <string name="login_label">Login Activity</string>
+    <string name="news_activity">Fake News Reader</string>
+    <string name="hint_username">Username/email (Optionnal)</string>
+    <string name="hint_password">Your Guardian KEY</string>
+    <string name="button_next">Next</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="error_password">Password must contain at least 8 characters.</string>
+    <string name="filter_title">Filter</string>
+    <string name="search_title">Search</string>
+    <string name="check_box_text">Use Donald Trump Fake News KEY</string>
+    <string name="newsid_header">TITLE</string>
+    <string name="section_header">SECTION</string>
+    <string name="link_header">SOURCE LINK</string>
+    <string name="author_header">AUTHOR</string>
+    <string name="type_header">NEWS TYPE</string>
+    <string name="date_header">DATE PUBLISHED</string>
+    <string name="intro">Welcome to Fake News Baby! The Android app that let you get the last 24 hours of normal news as selected by YOU or the "Fake News" as Donald Trump would do.\n\nEither enter the Key that you can get or already got from "The Guardian API" site and Bad News Baby will provide you with a selection of News Items\n\nOR\n\nUse "The Donald" default KEY to get everything related to him in the News.</string>
+    <string name="main_button_text">LET\'S GET ON WITH IT!\nGO</string>
+    <string name="delete">Delete</string>
+    <string name="color">Color</string>
+    <string name="refresh">Refresh</string>
+    <string name="all">ALL</string>
+    <string name="favorite">Favorite</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Suggestion1">Suggestion 1</string>
+    <string name="suggestion1_text">The Open Platform is a public web service for accessing all the content the Guardian creates, categorised by tags and section. To get started, You need an key to successfully authenticate against the API.</string>
+    <string name="suggestion2_text">To access the API, you will need to sign up for an API key, which should be sent with every request. Plus, once we have your contact details we will be able to give you notice of any upcoming changes.  The easiest way to see what data is included is to explore the data. You can build complex queries quickly and browse the results.  If your application needs to regularly poll the API for updated content, there are a few things you should know. Please ensure that you read the guide for polling applications below before starting.</string>
+    <string name="suggestion3_text">Make sure that you either put in a valid KEY or that you choose to selet the Checkbox to use Donald Trump\'s KEY to access the latest of what he consider fake news ruminations and stories</string>
+    <string name="Suggestion2">Suggestion 2</string>
+    <string name="Suggestion3">Suggestion 3</string>
+    <string name="title_activity_fake_news">FakeNewsActivity</string>
+
+
+</resources>

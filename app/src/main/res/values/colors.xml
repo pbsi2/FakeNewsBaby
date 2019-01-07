@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#242976</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#ffa500</color>
+    <color name="foreground_material_light_1">#48a4d2</color>
+    <color name="row_activated">#e65c2a</color>
+    <color name="transparent">#01f1efef</color>
+    <color name="foreground_material_light">#273677</color>
+    <color name="black">#000000</color>
+    <color name="disabled">#d7dff1</color>
+</resources>
