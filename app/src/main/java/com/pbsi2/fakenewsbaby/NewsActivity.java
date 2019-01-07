@@ -1,6 +1,6 @@
 package com.pbsi2.fakenewsbaby;
 
-import android.content.Context;
+import android.app.LoaderManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,8 +14,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.AsyncTaskLoader;
+
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +31,7 @@ public class NewsActivity extends AppCompatActivity implements
     NewsAdapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     FloatingActionButton fab;
-
+    GetNews myGetNews;
     private String TAG = NewsActivity.class.getSimpleName();
     private ActionModeCallback actionModeCallback;
     private androidx.appcompat.view.ActionMode actionMode;
@@ -65,6 +64,7 @@ public class NewsActivity extends AppCompatActivity implements
 
         getSupportLoaderManager().initLoader(LOADER_ID, null, this);
 
+        Loader<ArrayList<BadNews>> myLoadmanager = getSupportLoaderManager().getLoader(LOADER_ID);
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,26 +80,8 @@ public class NewsActivity extends AppCompatActivity implements
     @Override
     public Loader<ArrayList<BadNews>> onCreateLoader(int id, Bundle args) {
         // Create a new Loader with the following query parameters.
-        return new AsyncTaskLoader<ArrayList<BadNews>>(this) {
+        return new GetNews(this, MainActivity.guardianUrl);
 
-            ArrayList<BadNews> resultFromHttp;  //This work as a cache variable
-            //...
-            @Override
-            protected void onStartLoading() {
-                if (resultFromHttp!=null) {
-                    //To skip loadInBackground call
-                    deliverResult(resultFromHttp);
-                }else{
-                    forceLoad();
-                }
-            }
-                public ArrayList<BadNews> loadInBackground(){return null;}
-            @Override
-            public void deliverResult(ArrayList<BadNews> data) {
-                resultFromHttp = data;
-                super.deliverResult(data);
-            }
-        };
     }
 
     @Override
@@ -191,7 +173,7 @@ public class NewsActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(),
                     "REFRESH REQUESTED",
                     Toast.LENGTH_SHORT).show();
-            myLoadManager.restartLoader(LOADER_ID, null, pCallbacks);
+            getSupportLoaderManager().restartLoader(LOADER_ID, null, pCallbacks);
             Toast.makeText(getApplicationContext(),
                     "REFRESH DONE",
                     Toast.LENGTH_SHORT).show();
@@ -247,7 +229,7 @@ public class NewsActivity extends AppCompatActivity implements
                 case R.id.action_refresh:
 
                     onCreateLoader(14, null);
-                    myLoadManager.restartLoader(LOADER_ID, null, pCallbacks);
+                    getSupportLoaderManager().restartLoader(LOADER_ID, null, pCallbacks);
                     Toast.makeText(getApplicationContext(),
                             "REFRESH DONE",
                             Toast.LENGTH_SHORT).show();

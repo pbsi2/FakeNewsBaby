@@ -1,6 +1,6 @@
 package com.pbsi2.fakenewsbaby;
 
-import android.content.AsyncTaskLoader;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 class GetNews extends AsyncTaskLoader<ArrayList<BadNews>> {
     private String TAG = "GetNews";
