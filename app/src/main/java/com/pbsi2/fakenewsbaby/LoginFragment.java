@@ -3,19 +3,17 @@ package com.pbsi2.fakenewsbaby;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 
 public class LoginFragment extends Fragment {
@@ -29,8 +27,8 @@ public class LoginFragment extends Fragment {
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText keyText = view.findViewById(R.id.password_edit_text);
         keyText.setEnabled(true);
-        passwordTextInput.setBoxBackgroundColor(getResources().getColor(R.color.design_default_color_background, null));
-        MaterialButton nextButton = view.findViewById(R.id.next_button);
+        passwordTextInput.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+       Button nextButton = view.findViewById(R.id.next_button);
         final CheckBox defaultKeyBox = view.findViewById(R.id.checkbox);
         defaultKeyBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -48,10 +46,10 @@ public class LoginFragment extends Fragment {
                     MainActivity.guardianUrl = builder.build().toString();
                     keyText.setText("");
                     keyText.setEnabled(false);
-                    passwordTextInput.setBoxBackgroundColor(getResources().getColor(R.color.disabled, null));
+                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.disabled, null));
                 } else {
                     keyText.setEnabled(true);
-                    passwordTextInput.setBoxBackgroundColor(getResources().getColor(R.color.design_default_color_background, null));
+                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
 
                     MainActivity.okeyText = keyText.getText().toString();
                     Uri.Builder builder = new Uri.Builder();
@@ -79,7 +77,7 @@ public class LoginFragment extends Fragment {
                     startActivity(NewsIntent);
                 } else
 
-                    passwordTextInput.setBoxBackgroundColor(getResources().getColor(R.color.design_default_color_background, null));
+                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
 
                 MainActivity.okeyText = keyText.getText().toString();
                 if (MainActivity.okeyText.isEmpty()) {

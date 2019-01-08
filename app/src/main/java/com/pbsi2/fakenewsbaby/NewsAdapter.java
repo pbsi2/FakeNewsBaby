@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.SparseBooleanArray;
 import android.view.HapticFeedbackConstants;
@@ -15,9 +16,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import androidx.recyclerview.widget.RecyclerView;
+import static android.support.v4.content.ContextCompat.startActivity;
 
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
     private static int currentSelectedIndex = -1;

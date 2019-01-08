@@ -1,46 +1,48 @@
 package com.pbsi2.fakenewsbaby;
 
-import android.app.LoaderManager;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
-
-import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
-public class NewsActivity extends AppCompatActivity implements
-        NewsAdapter.ClickAdapterListener,
-        LoaderManager.LoaderCallbacks<ArrayList<BadNews>> {
+//@SuppressWarnings("ALL")
+public class NewsActivity extends AppCompatActivity
+        implements NewsAdapter.ClickAdapterListener,
+        LoaderManager.LoaderCallbacks<ArrayList<BadNews>>
+        //, View.OnClickListener
+{
 
 
-    private final int LOADER_ID = 14;
-    RecyclerView mRecyclerView;
-    NewsAdapter mAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
-    FloatingActionButton fab;
-    GetNews myGetNews;
+    private final int LOADER_ID = 0;
+    private RecyclerView mRecyclerView;
+    private NewsAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private FloatingActionButton fab;
+    private GetNews myGetNews;
     private String TAG = NewsActivity.class.getSimpleName();
     private ActionModeCallback actionModeCallback;
-    private androidx.appcompat.view.ActionMode actionMode;
-    private androidx.appcompat.widget.Toolbar nTopToolbar;
+    private ActionMode actionMode;
+    private android.support.v7.widget.Toolbar nTopToolbar;
     private LoaderManager.LoaderCallbacks<ArrayList<BadNews>> pCallbacks;
-
+private String pUrl;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        pUrl = MainActivity.guardianUrl;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_main);
         nTopToolbar = findViewById(R.id.toolbar);
@@ -60,27 +62,27 @@ public class NewsActivity extends AppCompatActivity implements
         ArrayList<BadNews> yourNews = new ArrayList<BadNews>();
         NewsAdapter mAdapter = new NewsAdapter(this, null, this);
         mRecyclerView.setAdapter(mAdapter);
+        pCallbacks = this;
         // Build the Loader
+        getSupportLoaderManager().initLoader(LOADER_ID,null, this).forceLoad();
 
-        getSupportLoaderManager().initLoader(LOADER_ID, null, this);
 
-        Loader<ArrayList<BadNews>> myLoadmanager = getSupportLoaderManager().getLoader(LOADER_ID);
 
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fab.setVisibility(View.GONE);
                 //myLoadManager.initLoader(LOADER_ID, yourNews, pCallbacks);
 
             }
-        });
+        });*/
     }
 
     @Override
     public Loader<ArrayList<BadNews>> onCreateLoader(int id, Bundle args) {
         // Create a new Loader with the following query parameters.
-        return new GetNews(this, MainActivity.guardianUrl);
+        return new GetNews(this);
 
     }
 
@@ -173,7 +175,7 @@ public class NewsActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(),
                     "REFRESH REQUESTED",
                     Toast.LENGTH_SHORT).show();
-            getSupportLoaderManager().restartLoader(LOADER_ID, null, pCallbacks);
+            getSupportLoaderManager().restartLoader(LOADER_ID, null, NewsActivity.this);
             Toast.makeText(getApplicationContext(),
                     "REFRESH DONE",
                     Toast.LENGTH_SHORT).show();

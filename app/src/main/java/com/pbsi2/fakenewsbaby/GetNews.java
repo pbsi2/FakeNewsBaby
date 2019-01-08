@@ -2,6 +2,7 @@ package com.pbsi2.fakenewsbaby;
 
 
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -10,25 +11,28 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import androidx.loader.content.AsyncTaskLoader;
 
-class GetNews extends AsyncTaskLoader<ArrayList<BadNews>> {
+
+public class GetNews extends AsyncTaskLoader<ArrayList<BadNews>>{
     private String TAG = "GetNews";
-    private String url;
-
+    private final String url = MainActivity.guardianUrl;
+    private final Context pContext;
+    private ArrayList<BadNews> myNews;
  /*   public GetNews(Context context) {
         super(context);
     }*/
-    public GetNews(Context context, String murl) {
+
+    public GetNews(Context context) {
         super(context);
-        url = murl;
+        pContext = context;
+
     }
 
     @Override
     public ArrayList<BadNews> loadInBackground() {
         HttpHandler sh = new HttpHandler();
         // Making a request to url and getting response
-        ArrayList<BadNews> myNews = new ArrayList<BadNews>();
+
         String jsonStr = sh.makeServiceCall(url);
         Log.e(TAG, "Response from url: " + jsonStr);
         try {
