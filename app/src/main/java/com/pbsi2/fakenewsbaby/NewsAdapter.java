@@ -105,14 +105,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         });
     }
 
-
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mNews.size();
     }
-
 
     public void toggleSelection(int pos) {
         currentSelectedIndex = pos;
@@ -141,7 +138,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         return selectedItems.size();
     }
 
-
     public interface ClickAdapterListener {
 
         void onRowClicked(int position);
@@ -158,9 +154,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         public LinearLayout linearLayout;
 
         public MyViewHolder(View v) {
-
             super(v);
-
             linearLayout = v.findViewById(R.id.linearLayout);
             TextView slink = v.findViewById(R.id.link_text);
             v.setOnLongClickListener(this);
@@ -173,5 +167,4 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
             return true;
         }
     }
-
 }

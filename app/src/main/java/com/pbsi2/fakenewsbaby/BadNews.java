@@ -46,7 +46,7 @@ public class BadNews {
      * Tdate
      */
     public final String date;
-    boolean colored;
+
 
     /**
      * Constructs a new {@link BadNews}.
@@ -58,14 +58,13 @@ public class BadNews {
      * @param type is the description
      * @param date    is ,well, the date
      */
-    public BadNews(String title, String section, String link, String author, String type, String date, boolean colored) {
+    public BadNews(String title, String section, String link, String author, String type, String date) {
         this.title = title;
         this.section = section;
         this.author = author;
         this.link = link;
         this.type = type;
         this.date = date;
-        this.colored = colored;
 
     }
 

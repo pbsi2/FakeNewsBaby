@@ -15,20 +15,22 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import static com.pbsi2.fakenewsbaby.R.color.background_material_light;
+import static com.pbsi2.fakenewsbaby.R.color.colorAccent;
 
 public class LoginFragment extends Fragment {
     private Intent NewsIntent;
+
     @Override
     public View onCreateView(
-
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText keyText = view.findViewById(R.id.password_edit_text);
         keyText.setEnabled(true);
-        passwordTextInput.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
-       Button nextButton = view.findViewById(R.id.next_button);
+        Button nextButton = view.findViewById(R.id.next_button);
+        Button cancelButton = view.findViewById(R.id.cancel_button);
         final CheckBox defaultKeyBox = view.findViewById(R.id.checkbox);
         defaultKeyBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -42,14 +44,14 @@ public class LoginFragment extends Fragment {
                             .appendQueryParameter("to-date", MainActivity.endDate)
                             .appendQueryParameter("show-tags", "contributor")
                             .appendQueryParameter("q", "trump")
-                            .appendQueryParameter("api-ky", MainActivity.okeyText);
+                            .appendQueryParameter("api-key", MainActivity.okeyText);
                     MainActivity.guardianUrl = builder.build().toString();
                     keyText.setText("");
                     keyText.setEnabled(false);
-                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.disabled, null));
+                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.interdit, null));
                 } else {
                     keyText.setEnabled(true);
-                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+                    passwordTextInput.setBackgroundColor(getResources().getColor(background_material_light, null));
 
                     MainActivity.okeyText = keyText.getText().toString();
                     Uri.Builder builder = new Uri.Builder();
@@ -59,9 +61,8 @@ public class LoginFragment extends Fragment {
                             .appendQueryParameter("from-date", MainActivity.startDate)
                             .appendQueryParameter("to-date", MainActivity.endDate)
                             .appendQueryParameter("show-tags", "contributor")
-                            .appendQueryParameter("api-ky", MainActivity.okeyText);
+                            .appendQueryParameter("api-key", MainActivity.okeyText);
                     MainActivity.guardianUrl = builder.build().toString();
-
                 }
             }
         });
@@ -75,40 +76,41 @@ public class LoginFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                     // Start the new activity
                     startActivity(NewsIntent);
-                } else
-
-                    passwordTextInput.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
-
-                MainActivity.okeyText = keyText.getText().toString();
-                if (MainActivity.okeyText.isEmpty()) {
-                    Toast.makeText(getContext(), "You need to enter a valid KEY",
-                            Toast.LENGTH_LONG).show();
                 } else {
-                    Uri.Builder builder = new Uri.Builder();
-                    builder.scheme("https")
-                            .authority("content.guardianapis.com")
-                            .appendPath("search")
-                            .appendQueryParameter("from-date", MainActivity.startDate)
-                            .appendQueryParameter("to-date", MainActivity.endDate)
-                            .appendQueryParameter("show-tags", "contributor")
-                            .appendQueryParameter("api-ky", MainActivity.okeyText);
-                    MainActivity.guardianUrl = builder.build().toString();
-                    NewsIntent = new Intent(getActivity(), NewsActivity.class);
-                    Toast.makeText(getContext(), "Link: " + MainActivity.guardianUrl,
-                            Toast.LENGTH_LONG).show();
-                    // Start the new activity
-                    startActivity(NewsIntent);
+                    passwordTextInput.setBackgroundColor(getResources().getColor(colorAccent, null));
+                    MainActivity.okeyText = keyText.getText().toString();
+                    if (MainActivity.okeyText.isEmpty()) {
+                        Toast.makeText(getContext(), "You need to enter a valid KEY",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Uri.Builder builder = new Uri.Builder();
+                        builder.scheme("https")
+                                .authority("content.guardianapis.com")
+                                .appendPath("search")
+                                .appendQueryParameter("from-date", MainActivity.startDate)
+                                .appendQueryParameter("to-date", MainActivity.endDate)
+                                .appendQueryParameter("show-tags", "contributor")
+                                .appendQueryParameter("api-key", MainActivity.okeyText);
+                        MainActivity.guardianUrl = builder.build().toString();
+                        NewsIntent = new Intent(getActivity(), NewsActivity.class);
+                        Toast.makeText(getContext(), "Link: " + MainActivity.guardianUrl,
+                                Toast.LENGTH_LONG).show();
+                        // Start the new activity
+                        startActivity(NewsIntent);
+                    }
                 }
             }
         });
-
-
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getFragmentManager().getBackStackEntryCount() == 0) {
+                    getFragmentManager().popBackStackImmediate();
+                } else {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
         return view;
     }
-
-    /*
-        In reality, this will have more complex logic including, but not limited to, actual
-        authentication of the username and password.
-     */
-
 }

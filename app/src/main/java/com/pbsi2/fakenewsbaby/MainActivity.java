@@ -2,12 +2,11 @@ package com.pbsi2.fakenewsbaby;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import java.util.GregorianCalendar;
 
@@ -25,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mTopToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mTopToolbar);
-        mTopToolbar.setLogo(R.mipmap.ic_badnews);
+        getSupportActionBar().setLogo(R.mipmap.ic_badnews);
+
         /*
         Format the query dates correctly
         */
@@ -40,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
         String smdate = String.format("%02d", gcalendar.get(GregorianCalendar.MONTH) + 1);
         String sddate = String.format("%02d", gcalendar.get(GregorianCalendar.DAY_OF_MONTH));
         startDate = sydate + "-" + smdate + "-" + sddate;
-        Toast.makeText(getApplicationContext(),
-                "News are from in the last 24 Hrs: " + startDate + "Today: " + endDate,
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"News are from in the last 24 Hrs: " + startDate + "Today: " + endDate, Toast.LENGTH_LONG).show();
         Button getOn = findViewById(R.id.button);
         getOn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,13 +66,10 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_favorite) {
-            Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

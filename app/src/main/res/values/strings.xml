@@ -38,6 +38,7 @@
     <string name="Suggestion2">Suggestion 2</string>
     <string name="Suggestion3">Suggestion 3</string>
     <string name="title_activity_fake_news">FakeNewsActivity</string>
+    <string name="null_data">Warning: There was no data coming from the query.</string>
 
 
 </resources>

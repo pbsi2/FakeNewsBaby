@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffc107</color>
+    <color name="colorPrimary">#161a63</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#e21238</color>
+    <color name="colorAccent">#f19000</color>
     <color name="foreground_material_light_1">#48a4d2</color>
     <color name="row_activated">#e65c2a</color>
     <color name="transparent">#01f1efef</color>
-    <color name="foreground_material_light">#273677</color>
+    <color name="foreground_material_light">#b23838</color>
     <color name="black">#000000</color>
     <color name="disabled">#d7dff1</color>
-    <color name="colorTextPrimary">#212cbc</color>
+    <color name="colorTextPrimary">#1f2477</color>
+    <color name="interdit">#fcd92828</color>
+    <color name="news_background">#171771</color>
+
 </resources>
